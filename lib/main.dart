@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TitleBar(),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Center(
                 child: Text(
                   'Under Construction',
@@ -65,9 +66,8 @@ class TitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        'CJHJ',
-        style: Theme.of(context).textTheme.headline2,
+      child: Image(
+        image: AssetImage('assets/cjhj.jpg'),
       ),
     );
   }
@@ -80,7 +80,7 @@ class NavBar extends StatelessWidget {
       color: Color(0xFFA6A6A6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           NavBarButton(
             text: 'Home',
@@ -111,10 +111,13 @@ class NavBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Center(
+      child: FlatButton(
+        onPressed: () {},
         child: Text(
           text,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
     );
