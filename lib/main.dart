@@ -1,7 +1,10 @@
+import 'package:cjhj_portfolio_site/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:cjhj_portfolio_site/components/shared/nav_bar.dart';
 import 'package:cjhj_portfolio_site/components/shared/title_bar.dart';
+import 'package:cjhj_portfolio_site/screens/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: generateMaterialColor(mainColor),
         textTheme: GoogleFonts.openSansTextTheme(
           Theme.of(context).textTheme,
         ),
@@ -36,6 +39,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isScreenVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        setState(() {
+          _isScreenVisible = true;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +63,19 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              flex: 5,
+              flex: 6,
               child: TitleBar(),
+            ),
+            Expanded(
+              flex: 1,
+              child: AnimatedOpacity(
+                duration: Duration(seconds: 2),
+                opacity: _isScreenVisible ? 1.0 : 0.0,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                  child: HomeScreen(),
+                ),
+              ),
             ),
             Expanded(
               flex: 1,

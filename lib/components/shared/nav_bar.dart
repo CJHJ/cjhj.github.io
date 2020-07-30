@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cjhj_portfolio_site/utils/colors.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -35,25 +36,27 @@ class NavBarButton extends StatelessWidget {
   String text;
   String mainColor = '252626';
 
-  int parseHexColorFromString(String color, String opacity) {
-    return int.parse(opacity + color, radix: 16);
-  }
-
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double textSize = screenWidth * 0.032;
+    double maxTextSize = 20.0;
+
+    print(textSize < maxTextSize);
+
     return Expanded(
       child: FlatButton(
         onPressed: () {},
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 20.0,
-            color: Color(parseHexColorFromString(mainColor, 'FF')),
+            fontSize: textSize < maxTextSize ? textSize : maxTextSize,
+            color: Theme.of(context).primaryColor,
             shadows: <Shadow>[
               Shadow(
                 offset: Offset(1.0, 1.0),
-                blurRadius: 2.0,
-                color: Color(parseHexColorFromString(mainColor, '55')),
+                blurRadius: 3.0,
+                color: Theme.of(context).primaryColor.withOpacity(0.1),
               ),
             ],
           ),
