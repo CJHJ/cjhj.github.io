@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -62,12 +63,34 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class TitleBar extends StatelessWidget {
+class TitleBar extends StatefulWidget {
+  _TitleBarState createState() => _TitleBarState();
+}
+
+class _TitleBarState extends State<TitleBar>
+    with SingleTickerProviderStateMixin {
+  bool _visible = false;
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setVisible(context));
+  }
+
+  void setVisible(context) {
+    setState(() {
+      _visible = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Image(
-        image: AssetImage('assets/cjhj.jpg'),
+      child: AnimatedOpacity(
+        duration: Duration(seconds: 3),
+        opacity: _visible ? 1.0 : 0.0,
+        child: Image(
+          image: AssetImage('assets/cjhj.jpg'),
+        ),
       ),
     );
   }
@@ -77,7 +100,7 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFA6A6A6),
+      color: Color(0xFFBFB2A3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
