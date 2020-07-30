@@ -1,21 +1,23 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:cjhj_portfolio_site/components/shared/nav_bar.dart';
+import 'package:cjhj_portfolio_site/components/shared/title_bar.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  String appTitle = 'CJHJ Portfolio Site';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CJHJ Portfolio Site',
+      title: appTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'CJHJ Portfolio Site'),
+      home: MyHomePage(title: appTitle),
     );
   }
 }
@@ -57,90 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: NavBar(),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TitleBar extends StatefulWidget {
-  _TitleBarState createState() => _TitleBarState();
-}
-
-class _TitleBarState extends State<TitleBar>
-    with SingleTickerProviderStateMixin {
-  bool _visible = false;
-
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => setVisible(context));
-  }
-
-  void setVisible(context) {
-    setState(() {
-      _visible = true;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: AnimatedOpacity(
-        duration: Duration(seconds: 3),
-        opacity: _visible ? 1.0 : 0.0,
-        child: Image(
-          image: AssetImage('assets/cjhj.jpg'),
-        ),
-      ),
-    );
-  }
-}
-
-class NavBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFBFB2A3),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          NavBarButton(
-            text: 'Home',
-          ),
-          NavBarButton(
-            text: 'Work',
-          ),
-          NavBarButton(
-            text: 'Experience',
-          ),
-          NavBarButton(
-            text: 'Music',
-          ),
-          NavBarButton(
-            text: 'About',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class NavBarButton extends StatelessWidget {
-  NavBarButton({this.text});
-
-  String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: FlatButton(
-        onPressed: () {},
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-          ),
         ),
       ),
     );
