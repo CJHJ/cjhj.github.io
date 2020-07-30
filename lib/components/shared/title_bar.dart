@@ -23,7 +23,7 @@ class _TitleBarState extends State<TitleBar>
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedOpacity(
-        duration: Duration(seconds: 3),
+        duration: Duration(seconds: 1),
         opacity: _visible ? 1.0 : 0.0,
         child: Image(
           image: AssetImage('assets/cjhj.jpg'),

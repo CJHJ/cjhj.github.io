@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cjhj_portfolio_site/components/shared/nav_bar.dart';
 import 'package:cjhj_portfolio_site/components/shared/title_bar.dart';
 
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
       title: appTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.openSansTextTheme(
+          Theme.of(context).textTheme,
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: appTitle),
@@ -44,15 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               flex: 5,
               child: TitleBar(),
-            ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text(
-                  'Under Construction',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ),
             ),
             Expanded(
               flex: 1,

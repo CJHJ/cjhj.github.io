@@ -4,7 +4,6 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFFBFB2A3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -13,7 +12,7 @@ class NavBar extends StatelessWidget {
             text: 'Home',
           ),
           NavBarButton(
-            text: 'Work',
+            text: 'Works',
           ),
           NavBarButton(
             text: 'Experience',
@@ -34,6 +33,11 @@ class NavBarButton extends StatelessWidget {
   NavBarButton({this.text});
 
   String text;
+  String mainColor = '252626';
+
+  int parseHexColorFromString(String color, String opacity) {
+    return int.parse(opacity + color, radix: 16);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,15 @@ class NavBarButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: Colors.white,
+            fontSize: 20.0,
+            color: Color(parseHexColorFromString(mainColor, 'FF')),
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(1.0, 1.0),
+                blurRadius: 2.0,
+                color: Color(parseHexColorFromString(mainColor, '55')),
+              ),
+            ],
           ),
         ),
       ),
