@@ -42,8 +42,6 @@ class NavBarButton extends StatelessWidget {
     double textSize = screenWidth * 0.032;
     double maxTextSize = 20.0;
 
-    print(textSize < maxTextSize);
-
     return Expanded(
       child: FlatButton(
         onPressed: () {},

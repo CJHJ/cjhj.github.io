@@ -68,11 +68,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               flex: 1,
-              child: AnimatedOpacity(
-                duration: Duration(seconds: 2),
-                opacity: _isScreenVisible ? 1.0 : 0.0,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+              child: AnimatedContainer(
+                duration: Duration(seconds: 1),
+                curve: Curves.easeOut,
+                transform: Matrix4.translationValues(
+                    _isScreenVisible ? 0.0 : -100.0, 0.0, 0.0),
+                child: AnimatedOpacity(
+                  duration: Duration(seconds: 1),
+                  opacity: _isScreenVisible ? 1.0 : 0.0,
                   child: HomeScreen(),
                 ),
               ),

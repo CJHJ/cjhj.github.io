@@ -6,7 +6,7 @@ class TitleBar extends StatefulWidget {
 
 class _TitleBarState extends State<TitleBar>
     with SingleTickerProviderStateMixin {
-  bool _visible = false;
+  bool _isScreenVisible = false;
 
   void initState() {
     super.initState();
@@ -15,18 +15,25 @@ class _TitleBarState extends State<TitleBar>
 
   void setVisible(context) {
     setState(() {
-      _visible = true;
+      _isScreenVisible = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: AnimatedOpacity(
-        duration: Duration(seconds: 2),
-        opacity: _visible ? 1.0 : 0.0,
-        child: Image(
-          image: AssetImage('assets/cjhj.jpg'),
+      child: AnimatedContainer(
+        duration: Duration(seconds: 1),
+        transform: Matrix4.translationValues(
+            _isScreenVisible ? 0.0 : -100.0, 0.0, 0.0),
+        curve: Curves.easeOut,
+        child: AnimatedOpacity(
+          duration: Duration(seconds: 1),
+          curve: Curves.easeOut,
+          opacity: _isScreenVisible ? 1.0 : 0.0,
+          child: Image(
+            image: AssetImage('assets/cjhj.jpg'),
+          ),
         ),
       ),
     );
