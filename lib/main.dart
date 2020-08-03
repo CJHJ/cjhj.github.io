@@ -1,10 +1,11 @@
-import 'package:cjhj_portfolio_site/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:cjhj_portfolio_site/colors.dart';
 import 'package:cjhj_portfolio_site/components/shared/nav_bar.dart';
 import 'package:cjhj_portfolio_site/components/shared/title_bar.dart';
 import 'package:cjhj_portfolio_site/screens/home.dart';
+import 'package:cjhj_portfolio_site/utils/animations.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,25 +65,25 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Expanded(
               flex: 6,
-              child: TitleBar(),
-            ),
-            Expanded(
-              flex: 1,
-              child: AnimatedContainer(
-                duration: Duration(seconds: 1),
-                curve: Curves.easeOut,
-                transform: Matrix4.translationValues(
-                    _isScreenVisible ? 0.0 : -100.0, 0.0, 0.0),
-                child: AnimatedOpacity(
-                  duration: Duration(seconds: 1),
-                  opacity: _isScreenVisible ? 1.0 : 0.0,
-                  child: HomeScreen(),
-                ),
+              child: AnimatedFadeMoveIn(
+                isWidgetVisible: _isScreenVisible,
+                child: TitleBar(),
               ),
             ),
             Expanded(
               flex: 1,
-              child: NavBar(),
+              child: AnimatedFadeMoveIn(
+                isWidgetVisible: _isScreenVisible,
+                child: HomeScreen(),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: AnimatedFadeMoveIn(
+                isWidgetVisible: _isScreenVisible,
+                moveInDirection: MoveInDirection.fromBelow,
+                child: NavBar(),
+              ),
             ),
           ],
         ),
