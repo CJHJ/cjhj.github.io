@@ -74,7 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
               child: AnimatedFadeMoveIn(
                 isWidgetVisible: _isScreenVisible,
-                child: HomeScreen(),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                  child: HomeScreen(),
+                ),
               ),
             ),
             Expanded(
