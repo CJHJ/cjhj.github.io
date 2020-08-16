@@ -9,9 +9,9 @@ class TitleBar extends StatefulWidget {
 }
 
 class _TitleBarState extends State<TitleBar> {
-  static const String straightLogoImagePath = 'assets/cjhj.jpg';
-  static const String winkLogoImagePath = 'assets/cjhj_wink.png';
-  static const String laughLogoImagePath = 'assets/cjhj_laugh.png';
+  Image straightLogoImage = Image.asset('assets/cjhj.jpg');
+  Image winkLogoImage = Image.asset('assets/cjhj_wink.png');
+  Image laughLogoImage = Image.asset('assets/cjhj_laugh.png');
   static const Duration winkDuration = Duration(milliseconds: 100);
 
   MainLogoState logoState = MainLogoState.straight;
@@ -59,19 +59,28 @@ class _TitleBarState extends State<TitleBar> {
     return Duration(milliseconds: generatedDurationNumber);
   }
 
-  String getLogoPath() {
+  Image getLogo() {
     if (this.logoState == MainLogoState.straight) {
-      return straightLogoImagePath;
+      return straightLogoImage;
     } else if (this.logoState == MainLogoState.wink) {
-      return winkLogoImagePath;
+      return winkLogoImage;
     }
-    return laughLogoImagePath;
+    return laughLogoImage;
   }
 
   @override
   void initState() {
     super.initState();
     startLogoTimer(generateDuration());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    precacheImage(straightLogoImage.image, context);
+    precacheImage(winkLogoImage.image, context);
+    precacheImage(laughLogoImage.image, context);
   }
 
   @override
@@ -84,9 +93,7 @@ class _TitleBarState extends State<TitleBar> {
         focusColor: Colors.white,
         hoverColor: Colors.white,
         padding: EdgeInsets.all(0),
-        child: Image(
-          image: AssetImage(getLogoPath()),
-        ),
+        child: getLogo(),
       ),
     );
   }
